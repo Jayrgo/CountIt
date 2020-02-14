@@ -1,0 +1,15 @@
+package-as: CountIt
+enable-nolib-creation: no
+
+externals:
+    Libs/LibStub: https://repos.curseforge.com/wow/libstub/trunk
+    Libs/CallbackHandler-1.0: https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0
+    Libs/LibSharedMedia-3.0: https://repos.curseforge.com/wow/libsharedmedia-3-0/trunk/LibSharedMedia-3.0
+    Libs/LibJayMixin: https://github.com/Jayrgo/LibJayMixin.git
+    Libs/LibJayCallback: https://github.com/Jayrgo/LibJayCallback.git
+    Libs/LibJayEvent: https://github.com/Jayrgo/LibJayEvent.git
+    Libs/LibJayDatabase: https://github.com/Jayrgo/LibJayDatabase.git
+    Libs/LibJayProtectedCall: https://github.com/Jayrgo/LibJayProtectedCall.git
+    Libs/LibJayDropDownMenu: https://github.com/Jayrgo/LibJayDropDownMenu.git
+    Libs/LibJayOptions: https://github.com/Jayrgo/LibJayOptions.git
+    Libs/LibJayDatabaseOptions: https://github.com/Jayrgo/LibJayDatabaseOptions.git

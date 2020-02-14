@@ -1,0 +1,32 @@
+## Interface: 11303
+## Title: CountIt |cffbebebeby Jayrgo|r
+## OptionalDeps: LibActionButton-1.0, Bartender4, Dominos
+## SavedVariables: CountIt_DB
+## Author: Jayrgo
+## Version: @project-version@
+## Notes: Show yourself how often you can use your spells and skills with your current rage, mana or energy.
+## Notes-deDE: Zeigt dir an wie oft du deine Spells und Skills benutzen kannst mit deiner derzeitigen Wut, Mana oder Energie.
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\LibSharedMedia-3.0\lib.xml
+Libs\LibJayMixin\LibJayMixin.xml
+Libs\LibJayCallback\LibJayCallback.xml
+Libs\LibJayEvent\LibJayEvent.xml
+Libs\LibJayDatabase\LibJayDatabase.xml
+Libs\LibJayProtectedCall\LibJayProtectedCall.xml
+Libs\LibJayDropDownMenu\LibJayDropDownMenu.xml
+Libs\LibJayOptions\LibJayOptions.xml
+Libs\LibJayDatabaseOptions\LibJayDatabaseOptions.xml
+
+Locales\enUS.lua
+Locales\deDE.lua
+
+Database.lua
+Options.lua
+
+CountIt.lua
+
+Blizzard.lua
+LibActionButton-1.0.lua
+Dominos.lua
