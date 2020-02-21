@@ -4,7 +4,7 @@ if not LibStub("AceAddon-3.0", true) or
 local AddOnName, AddOn = ...
 
 local function registerButtons()
-    for id, button in pairs(Dominos.ActionButton.active) do
+    for id, button in pairs(Dominos.ActionButton.active) do -- luacheck: ignore 213
         AddOn.RegisterButton(button)
     end
 end
