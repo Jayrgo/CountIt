@@ -7,6 +7,9 @@
 ## Notes: Show yourself how often you can use your spells and skills with your current rage, mana or energy.
 ## Notes-deDE: Zeigt dir an wie oft du deine Spells und Skills benutzen kannst mit deiner derzeitigen Wut, Mana oder Energie.
 
+## X-Category: Action Bars
+## X-Curse-Project-ID: 362766
+
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 Libs\LibSharedMedia-3.0\lib.xml
