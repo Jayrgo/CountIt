@@ -1,4 +1,7 @@
-# CountIT Changelog
+# CountIt Changelog
+
+### 1.1.2
+* Works now with ElvUI
 
 ### 1.1.1
 * Update TOC for 1.13.5

@@ -1,6 +1,6 @@
 ## Interface: 11305
 ## Title: CountIt |cffbebebeby Jayrgo|r
-## OptionalDeps: LibActionButton-1.0, Bartender4, Dominos
+## OptionalDeps: LibActionButton-1.0, Bartender4, Dominos, ElvUI
 ## SavedVariables: CountIt_DB
 ## Author: Jayrgo
 ## Version: @project-version@

@@ -6,7 +6,7 @@ __CountIt__ was developed to make questing and farming easier by showing you exa
 
 It also offers you a variety of setting options so that you can individually adapt it to your user interface.
 
-It also works with [Bartender4](https://www.curseforge.com/wow/addons/bartender4) and [Dominos](https://www.curseforge.com/wow/addons/dominos).
+It also works with [Bartender4](https://www.curseforge.com/wow/addons/bartender4), [Dominos](https://www.curseforge.com/wow/addons/dominos) and [ElvUI](https://www.tukui.org/classic-addons.php?id=2).
 
 ---
 
@@ -14,4 +14,4 @@ __CountIt__ wurde entwickelt, um das Questen und Farmen einfacher zu machen, ind
 
 Außerdem bietet es dir eine Vielzahl an Einstellungsmöglichkeiten damit du es individuell an deine Benutzeroberfläche anpassen kannst.
 
-Es funktioniert auch mit [Bartender4](https://www.curseforge.com/wow/addons/bartender4) und [Dominos](https://www.curseforge.com/wow/addons/dominos).
+Es funktioniert auch mit [Bartender4](https://www.curseforge.com/wow/addons/bartender4), [Dominos](https://www.curseforge.com/wow/addons/dominos) und [ElvUI](https://www.tukui.org/classic-addons.php?id=2).
