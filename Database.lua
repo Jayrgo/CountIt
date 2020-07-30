@@ -4,9 +4,8 @@ local L = AddOn.L
 AddOn.DB = LibStub("LibJayDatabase"):New(AddOnName, "CountIt_DB", L.DEFAULT)
 local DB = AddOn.DB
 
-DB:SetDefault(LibStub("LibSharedMedia-3.0"):GetDefault(
-                 LibStub("LibSharedMedia-3.0").MediaType.FONT), "appearance",
-             "font")
+DB:SetDefault(LibStub("LibSharedMedia-3.0"):GetDefault(LibStub("LibSharedMedia-3.0").MediaType.FONT), "appearance",
+              "font")
 DB:SetDefault(14, "appearance", "height")
 DB:SetDefault(false, "appearance", "outline")
 DB:SetDefault(false, "appearance", "shadow")

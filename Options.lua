@@ -7,8 +7,7 @@ local wipe = wipe
 
 local LSM = LibStub("LibSharedMedia-3.0")
 
-local getDbValue, setDbValue, getDefaultDbValue =
-    LibStub("LibJayDatabaseOptions"):GetOptionFunctions(DB)
+local getDbValue, setDbValue, getDefaultDbValue = LibStub("LibJayDatabaseOptions"):GetOptionFunctions(DB)
 
 --[[ local GetAddOnMemoryUsage = GetAddOnMemoryUsage
 local UpdateAddOnMemoryUsage = UpdateAddOnMemoryUsage ]]
@@ -25,7 +24,7 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
         text = L.VERSION,
         get = "|cffbebebe" .. GetAddOnMetadata(AddOnName, "Version") .. "|r",
         isReadOnly = true,
-        justifyH = "RIGHT"
+        justifyH = "RIGHT",
     }, --[[ {
         type = "string",
         text = L.MEMORY_USAGE,
@@ -55,12 +54,10 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                     local values = {}
 
                     local mediaList = LSM:List(LSM.MediaType.FONT)
-                    for i = 1, #mediaList do
-                        values[mediaList[i]] = mediaList[i]
-                    end
+                    for i = 1, #mediaList do values[mediaList[i]] = mediaList[i] end
 
                     return values
-                end
+                end,
             }, { -- height
                 type = "number",
                 text = L.HEIGHT,
@@ -70,21 +67,21 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 path = "height",
                 --[[ step = 0.5, ]]
                 min = 7,
-                max = 30
+                max = 30,
             }, { -- shadow
                 type = "boolean",
                 text = L.SHADOW,
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
-                path = "shadow"
+                path = "shadow",
             }, { -- outline
                 type = "boolean",
                 text = L.OUTLINE,
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
-                path = "outline"
+                path = "outline",
             }, { -- scale
                 type = "number",
                 text = L.SCALE,
@@ -94,7 +91,7 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 min = 0.25,
                 max = 3,
                 isPercent = true,
-                path = "scale"
+                path = "scale",
             }, { -- color
                 type = "color",
                 text = L.COLOR,
@@ -102,9 +99,9 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 set = setDbValue,
                 default = getDefaultDbValue,
                 path = "color",
-                hasAlpha = true
-            }
-        }
+                hasAlpha = true,
+            },
+        },
     }, { -- visibility
         type = "header",
         text = L.VISIBILITY,
@@ -116,14 +113,14 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
-                path = "showMax"
+                path = "showMax",
             }, { -- hideIfMax
                 type = "boolean",
                 text = L.HIDE_IF_EQUAL_TO_MAX,
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
-                path = "hideIfMax"
+                path = "hideIfMax",
             }, { -- threshold
                 type = "number",
                 text = L.THRESHOLD,
@@ -143,21 +140,19 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                     elseif threshold > info.arg[1] then
                         while true do
                             info.arg[1] = info.arg[1] + 10
-                            if threshold < info.arg[1] then
-                                break
-                            end
+                            if threshold < info.arg[1] then break end
                         end
                     end
                 end,
                 onUpdateInterval = 0.2,
-                arg = {10}
+                arg = {10},
             }, { -- mouseOver
                 type = "boolean",
                 text = L.MOUSE_OVER,
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
-                path = "mouseOver"
+                path = "mouseOver",
             }, { -- ignoredSpells
                 type = "select",
                 text = L.IGNORED_SPELLS,
@@ -175,22 +170,18 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                     local i = 0
                     while true do
                         i = i + 1
-                        local spellName, spellSubName, spellID =
-                            GetSpellBookItemName(i, BOOKTYPE_SPELL)
+                        local spellName, spellSubName, spellID = GetSpellBookItemName(i, BOOKTYPE_SPELL)
                         if spellName then
-                            local fullSpellName =
-                                spellName ..
-                                    (spellSubName ~= "" and
-                                        (" (" .. spellSubName .. ")") or "")
+                            local fullSpellName = spellName ..
+                                                      (spellSubName ~= "" and (" (" .. spellSubName .. ")") or "")
                             info.arg[1][spellID] = fullSpellName
-                            info.arg[2][spellID] =
-                                GetSpellBookItemTexture(i, BOOKTYPE_SPELL)
+                            info.arg[2][spellID] = GetSpellBookItemTexture(i, BOOKTYPE_SPELL)
                         else
                             break
                         end
                     end
                 end,
-                arg = {{}, {}}
+                arg = {{}, {}},
             }, { -- ignoredActionSlots
                 type = "select",
                 text = L.IGNORED_ACTION_SLOTS,
@@ -212,7 +203,7 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                     end
                 end,
                 onUpdateInterval = 1,
-                arg = {{}, {}}
+                arg = {{}, {}},
             }, { -- ignoredMacros
                 type = "select",
                 text = L.IGNORED_MACROS,
@@ -241,7 +232,7 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                     end
                 end,
                 onUpdateInterval = 1,
-                arg = {{}, {}}
+                arg = {{}, {}},
             }, { -- cooldown
                 type = "header",
                 text = L.COOLDOWN,
@@ -253,7 +244,7 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                         get = getDbValue,
                         set = setDbValue,
                         default = getDefaultDbValue,
-                        path = "hide"
+                        path = "hide",
                     }, { -- threshold
                         type = "number",
                         text = L.THRESHOLD,
@@ -262,13 +253,10 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                         default = getDefaultDbValue,
                         path = "threshold",
                         min = 0,
-                        max = function(info)
-                            return info.arg[1]
-                        end,
+                        max = function(info) return info.arg[1] end,
                         step = 0.1,
                         onUpdate = function(info)
-                            local threshold =
-                                DB:Get("visibility", "cooldown", "threshold")
+                            local threshold = DB:Get("visibility", "cooldown", "threshold")
                             if threshold == info.arg[1] then
                                 info.arg[1] = info.arg[1] + 10
                             elseif threshold + 10 < info.arg[1] then
@@ -276,18 +264,16 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                             elseif threshold > info.arg[1] then
                                 while true do
                                     info.arg[1] = info.arg[1] + 10
-                                    if threshold < info.arg[1] then
-                                        break
-                                    end
+                                    if threshold < info.arg[1] then break end
                                 end
                             end
                         end,
                         onUpdateInterval = 0.2,
-                        arg = {10}
-                    }
-                }
-            }
-        }
+                        arg = {10},
+                    },
+                },
+            },
+        },
     }, { -- position
         type = "header",
         text = L.POSITION,
@@ -308,9 +294,9 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                     TOPRIGHT = L.TOPRIGHT,
                     BOTTOMLEFT = L.BOTTOMLEFT,
                     BOTTOMRIGHT = L.BOTTOMRIGHT,
-                    CENTER = L.CENTER
+                    CENTER = L.CENTER,
                 },
-                path = "point"
+                path = "point",
             }, { -- ofsx
                 type = "number",
                 text = L.X_OFFSET,
@@ -319,7 +305,7 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
-                path = "ofsx"
+                path = "ofsx",
             }, { -- ofsy
                 type = "number",
                 text = L.Y_OFFSET,
@@ -328,9 +314,9 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 default = getDefaultDbValue,
                 min = -20,
                 max = 20,
-                path = "ofsy"
-            }
-        }
-    }
+                path = "ofsy",
+            },
+        },
+    },
 })
 LibStub("LibJayDatabaseOptions"):New(DB, select(2, GetAddOnInfo(AddOnName)))

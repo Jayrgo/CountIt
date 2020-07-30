@@ -1,5 +1,4 @@
-if not LibStub("AceAddon-3.0", true) or
-    not LibStub("AceAddon-3.0"):GetAddon("Dominos", true) then return end
+if not LibStub("AceAddon-3.0", true) or not LibStub("AceAddon-3.0"):GetAddon("Dominos", true) then return end
 
 local AddOnName, AddOn = ...
 
@@ -9,6 +8,5 @@ local function registerButtons()
     end
 end
 
-hooksecurefunc(LibStub("AceAddon-3.0"):GetAddon("Dominos").ActionButton, "New",
-               registerButtons)
+hooksecurefunc(LibStub("AceAddon-3.0"):GetAddon("Dominos").ActionButton, "New", registerButtons)
 registerButtons()

@@ -1,7 +1,7 @@
 -- luacheck: ignore
 std = "lua51"
 max_line_length = false
-exclude_files = {"Libs/", ".luacheckrc"}
+exclude_files = {"Libs/", ".luacheckrc", ".luaformat"}
 ignore = {
     "211", -- Unused local variable
     "212", -- Unused argument
