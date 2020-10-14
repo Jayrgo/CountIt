@@ -3,10 +3,11 @@ if not LibStub("AceAddon-3.0", true) or not LibStub("AceAddon-3.0"):GetAddon("Do
 local AddOnName, AddOn = ...
 
 local function registerButtons()
-    for id, button in pairs(Dominos.ActionButton.active) do -- luacheck: ignore 213
+    print("registerButtons")
+    for id, button in pairs(Dominos.ActionButtons) do -- luacheck: ignore 213
         AddOn.RegisterButton(button)
     end
 end
 
-hooksecurefunc(LibStub("AceAddon-3.0"):GetAddon("Dominos").ActionButton, "New", registerButtons)
+hooksecurefunc(getmetatable(LibStub("AceAddon-3.0"):GetAddon("Dominos").ActionButtons), "__index", registerButtons)
 registerButtons()
