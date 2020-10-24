@@ -1,15 +1,11 @@
-# CountIt Changelog
+## [2.0.0](https://github.com/Jayrgo/CountIt/compare/v1.1.3...v2.0.0) (2020-10-24)
 
-### 1.1.2
-* Works now with ElvUI
 
-### 1.1.1
-* Update TOC for 1.13.5
+### ⚠ BREAKING CHANGES
 
-### 1.1.0
-* Execute and spells that consume all combo points only show a maximum of 1
+* add retail support
 
-### 1.0.0
+### Features
 
-* Initial release
+* add retail support ([ff15e85](https://github.com/Jayrgo/CountIt/commit/ff15e85c7f75996f652b83f2b4f9acb81a264ff7))
 
