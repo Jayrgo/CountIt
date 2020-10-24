@@ -4,8 +4,8 @@
 ## SavedVariables: CountIt_DB
 ## Author: Jayrgo
 ## Version: 1.1.3
-## Notes: Show yourself how often you can use your spells and skills with your current rage, mana or energy.
-## Notes-deDE: Zeigt dir an wie oft du deine Spells und Skills benutzen kannst mit deiner derzeitigen Wut, Mana oder Energie.
+## Notes: Show yourself how often you can use your spells and skills with your current power (rage, mana, energy...).
+## Notes-deDE: Zeigt dir an wie oft du deine Spells und Skills benutzen kannst mit deiner derzeitigen Macth (Wut, Mana, Energie, ...).
 
 ## X-Category: Action Bars
 ## X-Curse-Project-ID: 362766
