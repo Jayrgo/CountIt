@@ -288,9 +288,29 @@ end
 
 local getPowerTypeFromToken
 do -- getPowerTypeFromToken
-    local lookup = {}
 
-    for k, v in pairs(Enum.PowerType) do lookup[strupper(k)] = v end
+    local lookup = {
+        ALTERNATE = Enum.PowerType.Alternate,
+        ARCANE_CHARGES = Enum.PowerType.ArcaneCharges,
+        CHI = Enum.PowerType.Chi,
+        COMBO_POINTS = Enum.PowerType.ComboPoints,
+        ENERGY = Enum.PowerType.Energy,
+        FOCUS = Enum.PowerType.Focus,
+        FURY = Enum.PowerType.Fury,
+        HAPPINESS = Enum.PowerType.Happiness,
+        HEALTH_COST = Enum.PowerType.HealthCost,
+        HOLY_POWER = Enum.PowerType.HolyPower,
+        INSANITY = Enum.PowerType.Insanity,
+        LUNAR_POWER = Enum.PowerType.LunarPower,
+        MAELSTROM = Enum.PowerType.Maelstrom,
+        MANA = Enum.PowerType.Mana,
+        NONE = Enum.PowerType.None,
+        PAIN = Enum.PowerType.Pain,
+        RAGE = Enum.PowerType.Rage,
+        RUNES = Enum.PowerType.Runes,
+        RUNIC_POWER = Enum.PowerType.RunicPower,
+        SOUL_SHARDS = Enum.PowerType.SoulShards,
+    }
 
     ---@param powerToken string
     ---@return number powerType
