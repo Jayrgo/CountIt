@@ -7,7 +7,7 @@ local wipe = wipe
 
 local LSM = LibStub("LibSharedMedia-3.0")
 
-local getDbValue, setDbValue, getDefaultDbValue = LibStub("LibJayDatabaseOptions"):GetOptionFunctions(DB)
+local getDbValue, setDbValue, getDefaultDbValue = LibMan1:Get("LibDatabaseOptions", 1):GetOptionFunctions(DB)
 
 --[[ local GetAddOnMemoryUsage = GetAddOnMemoryUsage
 local UpdateAddOnMemoryUsage = UpdateAddOnMemoryUsage ]]
@@ -337,4 +337,4 @@ LibMan1:Get("LibOptions", 1):New(select(2, GetAddOnInfo(AddOnName)), {
         },
     },
 })
-LibStub("LibJayDatabaseOptions"):New(DB, select(2, GetAddOnInfo(AddOnName)))
+LibMan1:Get("LibDatabaseOptions", 1):New(DB, select(2, GetAddOnInfo(AddOnName)))

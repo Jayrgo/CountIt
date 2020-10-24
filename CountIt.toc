@@ -21,7 +21,7 @@ Libs\LibDatabase\LibDatabase.xml
 Libs\LibProtectedCall\LibProtectedCall.xml
 Libs\LibDropDownMenu\LibDropDownMenu.xml
 Libs\LibOptions\LibOptions.xml
-Libs\LibJayDatabaseOptions\LibJayDatabaseOptions.xml
+Libs\LibDatabaseOptions\LibDatabaseOptions.xml
 
 Locales\enUS.lua
 Locales\deDE.lua

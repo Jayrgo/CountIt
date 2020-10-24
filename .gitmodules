@@ -22,3 +22,6 @@
 [submodule "Libs/LibOptions"]
 	path = Libs/LibOptions
 	url = https://github.com/Jayrgo/LibOptions.git
+[submodule "Libs/LibDatabaseOptions"]
+	path = Libs/LibDatabaseOptions
+	url = https://github.com/Jayrgo/LibDatabaseOptions.git
