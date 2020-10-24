@@ -219,6 +219,8 @@ local function updateCount(button)
                 end
                 fontString:SetShown(count > 0)
                 return
+            else
+                fontString:Hide()
             end
         else
             fontString:Hide()
