@@ -19,6 +19,8 @@ jobs:
           echo "GAME_VERSION_CLASSIC=1.13.5" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: luacheck
         uses: Jayrgo/luacheck-action@v1
       - name: Create changelog
