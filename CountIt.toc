@@ -19,7 +19,7 @@ Libs\LibCallback\LibCallback.xml
 Libs\LibEvent\LibEvent.xml
 Libs\LibDatabase\LibDatabase.xml
 Libs\LibProtectedCall\LibProtectedCall.xml
-Libs\LibDropDownMenu\LibDropDownMenu.xml
+Libs\LibDropdown\LibDropdown.xml
 Libs\LibOptions\LibOptions.xml
 Libs\LibDatabaseOptions\LibDatabaseOptions.xml
 
