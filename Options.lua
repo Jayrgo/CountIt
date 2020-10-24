@@ -38,7 +38,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
         end,
         onUpdateInterval = 5,
         arg = {}
-    },  ]] { -- appearance
+    },  ]]
+    { -- appearance
         type = "header",
         text = L.APPEARANCE,
         path = "appearance",
@@ -58,7 +59,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
 
                     return values
                 end,
-            }, { -- height
+            },
+            { -- height
                 type = "number",
                 text = L.HEIGHT,
                 get = getDbValue,
@@ -68,21 +70,24 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 --[[ step = 0.5, ]]
                 min = 7,
                 max = 30,
-            }, { -- shadow
+            },
+            { -- shadow
                 type = "boolean",
                 text = L.SHADOW,
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
                 path = "shadow",
-            }, { -- outline
+            },
+            { -- outline
                 type = "boolean",
                 text = L.OUTLINE,
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
                 path = "outline",
-            }, { -- scale
+            },
+            { -- scale
                 type = "number",
                 text = L.SCALE,
                 get = getDbValue,
@@ -92,7 +97,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 max = 3,
                 isPercent = true,
                 path = "scale",
-            }, { -- color
+            },
+            { -- color
                 type = "color",
                 text = L.COLOR,
                 get = getDbValue,
@@ -102,7 +108,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 hasAlpha = true,
             },
         },
-    }, { -- visibility
+    },
+    { -- visibility
         type = "header",
         text = L.VISIBILITY,
         path = "visibility",
@@ -114,14 +121,16 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 set = setDbValue,
                 default = getDefaultDbValue,
                 path = "showMax",
-            }, { -- hideIfMax
+            },
+            { -- hideIfMax
                 type = "boolean",
                 text = L.HIDE_IF_EQUAL_TO_MAX,
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
                 path = "hideIfMax",
-            }, { -- threshold
+            },
+            { -- threshold
                 type = "number",
                 text = L.THRESHOLD,
                 get = getDbValue,
@@ -146,14 +155,16 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 end,
                 onUpdateInterval = 0.2,
                 arg = {10},
-            }, { -- mouseOver
+            },
+            { -- mouseOver
                 type = "boolean",
                 text = L.MOUSE_OVER,
                 get = getDbValue,
                 set = setDbValue,
                 default = getDefaultDbValue,
                 path = "mouseOver",
-            }, { -- ignoredSpells
+            },
+            { -- ignoredSpells
                 type = "select",
                 text = L.IGNORED_SPELLS,
                 get = getDbValue,
@@ -182,7 +193,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                     end
                 end,
                 arg = {{}, {}},
-            }, { -- ignoredActionSlots
+            },
+            { -- ignoredActionSlots
                 type = "select",
                 text = L.IGNORED_ACTION_SLOTS,
                 get = getDbValue,
@@ -204,7 +216,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 end,
                 onUpdateInterval = 1,
                 arg = {{}, {}},
-            }, { -- ignoredMacros
+            },
+            { -- ignoredMacros
                 type = "select",
                 text = L.IGNORED_MACROS,
                 get = getDbValue,
@@ -233,7 +246,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 end,
                 onUpdateInterval = 1,
                 arg = {{}, {}},
-            }, { -- cooldown
+            },
+            { -- cooldown
                 type = "header",
                 text = L.COOLDOWN,
                 path = "cooldown",
@@ -245,7 +259,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                         set = setDbValue,
                         default = getDefaultDbValue,
                         path = "hide",
-                    }, { -- threshold
+                    },
+                    { -- threshold
                         type = "number",
                         text = L.THRESHOLD,
                         get = getDbValue,
@@ -274,7 +289,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 },
             },
         },
-    }, { -- position
+    },
+    { -- position
         type = "header",
         text = L.POSITION,
         path = "position",
@@ -297,7 +313,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                     CENTER = L.CENTER,
                 },
                 path = "point",
-            }, { -- ofsx
+            },
+            { -- ofsx
                 type = "number",
                 text = L.X_OFFSET,
                 min = -20,
@@ -306,7 +323,8 @@ LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
                 set = setDbValue,
                 default = getDefaultDbValue,
                 path = "ofsx",
-            }, { -- ofsy
+            },
+            { -- ofsy
                 type = "number",
                 text = L.Y_OFFSET,
                 get = getDbValue,
