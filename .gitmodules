@@ -16,3 +16,6 @@
 [submodule "Libs/LibProtectedCall"]
 	path = Libs/LibProtectedCall
 	url = https://github.com/Jayrgo/LibProtectedCall.git
+[submodule "Libs/LibDropdown"]
+	path = Libs/LibDropdown
+	url = https://github.com/Jayrgo/LibDropdown.git

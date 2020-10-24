@@ -19,7 +19,7 @@ Libs\LibCallback\LibCallback.xml
 Libs\LibEvent\LibEvent.xml
 Libs\LibDatabase\LibDatabase.xml
 Libs\LibProtectedCall\LibProtectedCall.xml
-Libs\LibJayDropDownMenu\LibJayDropDownMenu.xml
+Libs\LibDropDownMenu\LibDropDownMenu.xml
 Libs\LibJayOptions\LibJayOptions.xml
 Libs\LibJayDatabaseOptions\LibJayDatabaseOptions.xml
 
