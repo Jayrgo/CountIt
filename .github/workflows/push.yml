@@ -72,6 +72,7 @@ jobs:
           changelog_type: markdown
           display_name: ${{ steps.changelog.outputs.tag }}
           game_versions: WoW:${{ env.GAME_VERSION_RETAIL }}
+          release_type: release
       - name: "[retail] Delete archive"
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
@@ -106,6 +107,7 @@ jobs:
           changelog_type: markdown
           display_name: ${{ steps.changelog.outputs.tag }}
           game_versions: WoW:${{ env.GAME_VERSION_CLASSIC }}
+          release_type: release
       - name: "[classic] Delete archive"
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
