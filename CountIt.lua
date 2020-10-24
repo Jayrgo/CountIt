@@ -330,19 +330,20 @@ local Wait = C_Timer.After
 LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_PAGE_CHANGED", function() Wait(0.1, updateAction) end)
 
 ---@param unitTarget string
----@param powerToken string
-LibMan1:Get("LibEvent", 1):Register("UNIT_POWER_FREQUENT", function(unitTarget, powerToken)
+---@param powerType string
+LibMan1:Get("LibEvent", 1):Register("UNIT_POWER_FREQUENT", function(unitTarget, powerType)
     if unitTarget == "player" then
-        local powerType = getPowerTypeFromToken(powerToken)
+        powerType = getPowerTypeFromToken(powerType)
         power[powerType] = UnitPower(unitTarget, powerType)
         updateCount()
     end
 end)
 
 ---@param unitTarget string
----@param powerType PowerType
+---@param powerType string
 LibMan1:Get("LibEvent", 1):Register("UNIT_MAXPOWER", function(unitTarget, powerType)
     if unitTarget == "player" then
+        powerType = getPowerTypeFromToken(powerType) or powerType
         maxPower[powerType] = UnitPowerMax(unitTarget, powerType)
         updateCount()
     end
