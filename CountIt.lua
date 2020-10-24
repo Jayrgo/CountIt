@@ -6,6 +6,7 @@ local checkFrame = CreateFrame("Frame")
 checkFrame:Hide()
 
 local checks = {}
+
 ---@param button table
 local function addCheck(button)
     checks[button] = true
@@ -15,6 +16,7 @@ end
 local buttons = {}
 local fontStrings = {}
 local LSM = LibStub("LibSharedMedia-3.0")
+
 ---@param button table
 local function updateText(button)
     if button then
@@ -118,6 +120,7 @@ local GetMacroSpell = GetMacroSpell
 local GetSpellCooldown = GetSpellCooldown
 local GetTime = GetTime
 local IsUsableAction = IsUsableAction
+
 ---@param action number
 ---@return number count
 ---@return number maxCount
@@ -212,6 +215,7 @@ local function update(button)
 end
 
 local ActionButton_CalculateAction = ActionButton_CalculateAction
+
 ---@param button table
 local function updateAction(button)
     if button then
@@ -247,6 +251,7 @@ do -- getPowerTypeFromToken
         INSANITY = Enum.PowerType.Insanity,
         COMBO_POINTS = Enum.PowerType.ComboPoints,
     }
+
     ---@param powerToken string
     ---@return number powerType
     function getPowerTypeFromToken(powerToken) return lookup[powerToken] end
@@ -261,6 +266,7 @@ LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_UPDATE_USABLE", updateCount)
 LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_UPDATE_COOLDOWN", updateCount)
 
 local Wait = C_Timer.After
+
 LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_PAGE_CHANGED", function() Wait(0.1, updateAction) end)
 
 LibMan1:Get("LibEvent", 1):Register("UNIT_POWER_FREQUENT", function(unitTarget, powerToken)
@@ -279,12 +285,14 @@ LibMan1:Get("LibEvent", 1):Register("UNIT_MAXPOWER", function(unitTarget, powerT
 end)
 
 local wipe = wipe
+
 local function updateSpellPowerCost()
     wipe(spellPowerCost)
     updateCount()
 end
 
 local UnitPowerType = UnitPowerType
+
 LibMan1:Get("LibEvent", 1):Register("PLAYER_ENTERING_WORLD", function(isInitialLogin, isReloadingUi)
     local powerType = UnitPowerType("player")
     power[powerType] = UnitPower("player", powerType)
@@ -305,6 +313,7 @@ local error = error
 local format = format
 local tContains = tContains
 local type = type
+
 ---@param button table
 function AddOn.RegisterButton(button)
     if type(button) ~= "table" then
