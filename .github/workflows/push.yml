@@ -74,7 +74,7 @@ jobs:
           file_path: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip"
           changelog: ${{ steps.changelog.outputs.changelog }}
           changelog_type: markdown
-          display_name: ${{ steps.changelog.outputs.tag }}
+          display_name: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}"
           game_versions: WoW:${{ env.GAME_VERSION_RETAIL }}
           release_type: release
       - name: "[retail] Delete archive"
@@ -113,7 +113,7 @@ jobs:
           file_path: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic.zip"
           changelog: ${{ steps.changelog.outputs.changelog }}
           changelog_type: markdown
-          display_name: ${{ steps.changelog.outputs.tag }}
+          display_name: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic"
           game_versions: WoW:${{ env.GAME_VERSION_CLASSIC }}
           release_type: release
       - name: "[classic] Delete archive"
