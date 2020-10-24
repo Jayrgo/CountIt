@@ -1,7 +1,7 @@
-### [2.0.2](https://github.com/Jayrgo/CountIt/compare/v2.0.1...v2.0.2) (2020-10-24)
+### [2.0.3](https://github.com/Jayrgo/CountIt/compare/v2.0.2...v2.0.3) (2020-10-24)
 
 
 ### Bug Fixes
 
-* correct max power query ([6684538](https://github.com/Jayrgo/CountIt/commit/66845388446b1f770bc4f42c6a046042aa2f7600))
+* hide text if above threshold ([8551003](https://github.com/Jayrgo/CountIt/commit/8551003ed4f596956dd19602f20f77022e15f12d))
 
