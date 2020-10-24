@@ -114,7 +114,7 @@ jobs:
           changelog: ${{ steps.changelog.outputs.changelog }}
           changelog_type: markdown
           display_name: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic"
-          game_versions: WoW:${{ env.GAME_VERSION_CLASSIC }}
+          game_versions: WoW Classic:${{ env.GAME_VERSION_CLASSIC }}
           release_type: release
       - name: "[classic] Delete archive"
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
