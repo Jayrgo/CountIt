@@ -1,6 +1,10 @@
 if GetLocale() ~= "deDE" then return end
 
-local AddOnName, AddOn = ...
+----@type string
+local AddOnName = ...
+---@type Addon
+local AddOn = select(2, ...)
+
 local L = AddOn.L
 
 L.ANCHOR = "Anker"

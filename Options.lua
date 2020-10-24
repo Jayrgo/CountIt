@@ -1,4 +1,8 @@
-local AddOnName, AddOn = ...
+----@type string
+local AddOnName = ...
+---@type Addon
+local AddOn = select(2, ...)
+
 local L = AddOn.L
 local DB = AddOn.DB
 
@@ -8,9 +12,6 @@ local wipe = wipe
 local LSM = LibStub("LibSharedMedia-3.0")
 
 local getDbValue, setDbValue, getDefaultDbValue = LibMan1:Get("LibDatabaseOptions", 1):GetOptionFunctions(DB)
-
---[[ local GetAddOnMemoryUsage = GetAddOnMemoryUsage
-local UpdateAddOnMemoryUsage = UpdateAddOnMemoryUsage ]]
 
 local BOOKTYPE_SPELL = BOOKTYPE_SPELL
 local GetActionTexture = GetActionTexture
@@ -25,20 +26,7 @@ LibMan1:Get("LibOptions", 1):New(select(2, GetAddOnInfo(AddOnName)), {
         get = "|cffbebebe" .. GetAddOnMetadata(AddOnName, "Version") .. "|r",
         isReadOnly = true,
         justifyH = "RIGHT",
-    }, --[[ {
-        type = "string",
-        text = L.MEMORY_USAGE,
-        get = function(info) return info.arg[1] end,
-        isReadOnly = true,
-        justifyH = "RIGHT",
-        onUpdate = function(info)
-            UpdateAddOnMemoryUsage()
-            info.arg[1] = format("|cffd3d3d3%.2f kb|r",
-                                 GetAddOnMemoryUsage(AddOnName))
-        end,
-        onUpdateInterval = 5,
-        arg = {}
-    },  ]]
+    },
     { -- appearance
         type = "header",
         text = L.APPEARANCE,

@@ -1,4 +1,7 @@
-local AddOnName, AddOn = ...
+----@type string
+local AddOnName = ...
+---@type Addon
+local AddOn = select(2, ...)
 
 for i = 1, 12 do
     AddOn.RegisterButton(_G["ActionButton" .. i])

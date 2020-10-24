@@ -1,6 +1,10 @@
 if not LibStub("AceAddon-3.0", true) or not LibStub("AceAddon-3.0"):GetAddon("Dominos", true) then return end
 
-local AddOnName, AddOn = ...
+----@type string
+local AddOnName = ...
+---@type Addon
+local AddOn = select(2, ...)
+
 
 local function registerButtons()
     for id, button in pairs(Dominos.ActionButtons) do -- luacheck: ignore 213

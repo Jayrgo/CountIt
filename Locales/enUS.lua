@@ -1,17 +1,22 @@
-local AddOnName, AddOn = ...
+----@type string
+local AddOnName = ...
+---@type Addon
+local AddOn = select(2, ...)
 
 local _G = _G
---[[ local error = error
-local format = format ]]
+local error = error
+local format = format
+
 AddOn.L = setmetatable({}, {
+    ---@param t table<string, string>
+    ---@param k string
+    ---@return string
     __index = function(t, k)
         local v = _G[k]
-        --[[ if not v then
-            error(format("%s: Missing localization entry for %s.", AddOnName, k))
-        end ]]
+        if not v then error(format("%s: Missing localization entry for %s.", AddOnName, k)) end
         t[k] = v
         return v
-    end
+    end,
 })
 
 local L = AddOn.L
