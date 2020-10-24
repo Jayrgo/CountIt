@@ -15,7 +15,7 @@ Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 Libs\LibSharedMedia-3.0\lib.xml
 Libs\LibMan\LibMan.xml
 Libs\LibMixin\LibMixin.xml
-Libs\LibJayCallback\LibJayCallback.xml
+Libs\LibCallback\LibCallback.xml
 Libs\LibJayEvent\LibJayEvent.xml
 Libs\LibJayDatabase\LibJayDatabase.xml
 Libs\LibJayProtectedCall\LibJayProtectedCall.xml
