@@ -3,7 +3,7 @@
 ## OptionalDeps: LibActionButton-1.0, Bartender4, Dominos, ElvUI
 ## SavedVariables: CountIt_DB
 ## Author: Jayrgo
-## Version: 2.0.1
+## Version: 2.0.2
 ## Notes: Show yourself how often you can use your spells and skills with your current power (rage, mana, energy...).
 ## Notes-deDE: Zeigt dir an wie oft du deine Spells und Skills benutzen kannst mit deiner derzeitigen Macth (Wut, Mana, Energie, ...).
 

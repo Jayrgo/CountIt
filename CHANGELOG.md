@@ -1,7 +1,7 @@
-### [2.0.1](https://github.com/Jayrgo/CountIt/compare/v2.0.0...v2.0.1) (2020-10-24)
+### [2.0.2](https://github.com/Jayrgo/CountIt/compare/v2.0.1...v2.0.2) (2020-10-24)
 
 
 ### Bug Fixes
 
-* correct getPowerTypeFromToken ([c35abfc](https://github.com/Jayrgo/CountIt/commit/c35abfc1fc3cec0186c5857d3736c3468b6fff92))
+* correct max power query ([6684538](https://github.com/Jayrgo/CountIt/commit/66845388446b1f770bc4f42c6a046042aa2f7600))
 
