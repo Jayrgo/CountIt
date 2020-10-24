@@ -17,7 +17,7 @@ Libs\LibMan\LibMan.xml
 Libs\LibMixin\LibMixin.xml
 Libs\LibCallback\LibCallback.xml
 Libs\LibEvent\LibEvent.xml
-Libs\LibJayDatabase\LibJayDatabase.xml
+Libs\LibDatabase\LibDatabase.xml
 Libs\LibJayProtectedCall\LibJayProtectedCall.xml
 Libs\LibJayDropDownMenu\LibJayDropDownMenu.xml
 Libs\LibJayOptions\LibJayOptions.xml

@@ -10,3 +10,6 @@
 [submodule "Libs/LibEvent"]
 	path = Libs/LibEvent
 	url = https://github.com/Jayrgo/LibEvent.git
+[submodule "Libs/LibDatabase"]
+	path = Libs/LibDatabase
+	url = https://github.com/Jayrgo/LibDatabase.git

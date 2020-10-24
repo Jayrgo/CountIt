@@ -1,7 +1,7 @@
 local AddOnName, AddOn = ...
 local L = AddOn.L
 
-AddOn.DB = LibStub("LibJayDatabase"):New(AddOnName, "CountIt_DB", L.DEFAULT)
+AddOn.DB = LibMan1:Get("LibDatabase", 1):New(AddOnName, "CountIt_DB", L.DEFAULT)
 local DB = AddOn.DB
 
 DB:SetDefault(LibStub("LibSharedMedia-3.0"):GetDefault(LibStub("LibSharedMedia-3.0").MediaType.FONT), "appearance",
