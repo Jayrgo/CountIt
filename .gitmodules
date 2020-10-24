@@ -1,0 +1,3 @@
+[submodule "Libs/LibMan"]
+	path = Libs/LibMan
+	url = https://github.com/Jayrgo/LibMan.git
