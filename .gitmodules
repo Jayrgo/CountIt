@@ -1,3 +1,6 @@
 [submodule "Libs/LibMan"]
 	path = Libs/LibMan
 	url = https://github.com/Jayrgo/LibMan.git
+[submodule "Libs/LibMixin"]
+	path = Libs/LibMixin
+	url = https://github.com/Jayrgo/LibMixin.git
