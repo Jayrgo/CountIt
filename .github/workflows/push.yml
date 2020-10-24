@@ -42,14 +42,18 @@ jobs:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
-      - name: "[retail] Create archive"
+      - name: "[retail] Create TOC"
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
           echo "$(tail -n +2 ${{ env.NAME }}.toc)" > ${{ env.NAME }}.toc
           echo '## Interface: ${{ env.INTERFACE_RETAIL }}'$'\n'"$( cat ${{ env.NAME }}.toc)" > ${{ env.NAME }}.toc
           git add ${{ env.NAME }}.toc
           git commit -m "chore: Release"
-          git archive -o "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip" --prefix "${{ env.NAME }}/" HEAD
+      - uses: Jayrgo/git-archive-all-action@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        with:
+          output: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip"
+          args: --prefix "${{ env.NAME }}/"
       - name: "[retail] Upload archive"
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         uses: actions/upload-release-asset@v1
@@ -77,14 +81,18 @@ jobs:
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
           rm "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip"
-      - name: "[classic] Create archive"
+      - name: "[classic] Create TOC"
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
           echo "$(tail -n +2 ${{ env.NAME }}.toc)" > ${{ env.NAME }}.toc
           echo '## Interface: ${{ env.INTERFACE_CLASSIC }}'$'\n'"$( cat ${{ env.NAME }}.toc)" > ${{ env.NAME }}.toc
           git add ${{ env.NAME }}.toc
           git commit -m "chore: Release"
-          git archive -o "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic.zip" --prefix "${{ env.NAME }}/" HEAD
+      - uses: Jayrgo/git-archive-all-action@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        with:
+          output: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic.zip"
+          args: --prefix "${{ env.NAME }}/"
       - name: "[classic] Upload archive"
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         uses: actions/upload-release-asset@v1
