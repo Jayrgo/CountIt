@@ -12,8 +12,11 @@ jobs:
       - name: Set environment variables
         run: |
           echo "NAME=CountIt" >> $GITHUB_ENV
+          echo "CF_PROJECT_ID=362766" >> $GITHUB_ENV
           echo "INTERFACE_RETAIL=90001" >> $GITHUB_ENV
+          echo "GAME_VERSION_RETAIL=9.0.1" >> $GITHUB_ENV
           echo "INTERFACE_CLASSIC=11305" >> $GITHUB_ENV
+          echo "GAME_VERSION_CLASSIC=1.13.5" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
       - name: luacheck
@@ -28,9 +31,9 @@ jobs:
           skip-version-file: true
           pre-commit: .pre-commit.js
       - name: Create release
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         uses: actions/create-release@v1
         id: release
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -38,16 +41,16 @@ jobs:
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
       - name: "[retail] Create archive"
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
           echo "$(tail -n +2 ${{ env.NAME }}.toc)" > ${{ env.NAME }}.toc
           echo '## Interface: ${{ env.INTERFACE_RETAIL }}'$'\n'"$( cat ${{ env.NAME }}.toc)" > ${{ env.NAME }}.toc
           git add ${{ env.NAME }}.toc
           git commit -m "chore: Release"
           git archive -o "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip" --prefix "${{ env.NAME }}/" HEAD
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
       - name: "[retail] Upload archive"
-        uses: actions/upload-release-asset@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -55,21 +58,33 @@ jobs:
           asset_path: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip"
           asset_name: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip"
           asset_content_type: application/zip
+      - name: "[retail] Upload to CurseForge"
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        uses: itsmeow/curseforge-upload@v2
+        with:
+          token: ${{ secrets.CF_API_KEY }}
+          project_id: ${{ env.CF_PROJECT_ID }}
+          game_endpoint: wow
+          file_path: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip"
+          changelog: ${{ steps.changelog.outputs.changelog }}
+          changelog_type: markdown
+          display_name: ${{ steps.changelog.outputs.tag }}
+          game_versions: WoW:${{ env.GAME_VERSION_RETAIL }}
       - name: "[retail] Delete archive"
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
           rm "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}.zip"
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
       - name: "[classic] Create archive"
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
           echo "$(tail -n +2 ${{ env.NAME }}.toc)" > ${{ env.NAME }}.toc
           echo '## Interface: ${{ env.INTERFACE_CLASSIC }}'$'\n'"$( cat ${{ env.NAME }}.toc)" > ${{ env.NAME }}.toc
           git add ${{ env.NAME }}.toc
           git commit -m "chore: Release"
           git archive -o "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic.zip" --prefix "${{ env.NAME }}/" HEAD
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
       - name: "[classic] Upload archive"
-        uses: actions/upload-release-asset@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -77,7 +92,19 @@ jobs:
           asset_path: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic.zip"
           asset_name: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic.zip"
           asset_content_type: application/zip
+      - name: "[classic] Upload to CurseForge"
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        uses: itsmeow/curseforge-upload@v2
+        with:
+          token: ${{ secrets.CF_API_KEY }}
+          project_id: ${{ env.CF_PROJECT_ID }}
+          game_endpoint: wow
+          file_path: "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic.zip"
+          changelog: ${{ steps.changelog.outputs.changelog }}
+          changelog_type: markdown
+          display_name: ${{ steps.changelog.outputs.tag }}
+          game_versions: WoW:${{ env.GAME_VERSION_CLASSIC }}
       - name: "[classic] Delete archive"
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         run: |
           rm "${{ env.NAME }}-${{ steps.changelog.outputs.tag }}-classic.zip"
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
