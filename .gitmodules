@@ -19,3 +19,6 @@
 [submodule "Libs/LibDropdown"]
 	path = Libs/LibDropdown
 	url = https://github.com/Jayrgo/LibDropdown.git
+[submodule "Libs/LibOptions"]
+	path = Libs/LibOptions
+	url = https://github.com/Jayrgo/LibOptions.git

@@ -20,7 +20,7 @@ Libs\LibEvent\LibEvent.xml
 Libs\LibDatabase\LibDatabase.xml
 Libs\LibProtectedCall\LibProtectedCall.xml
 Libs\LibDropDownMenu\LibDropDownMenu.xml
-Libs\LibJayOptions\LibJayOptions.xml
+Libs\LibOptions\LibOptions.xml
 Libs\LibJayDatabaseOptions\LibJayDatabaseOptions.xml
 
 Locales\enUS.lua

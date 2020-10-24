@@ -18,7 +18,7 @@ local GetMacroInfo = GetMacroInfo
 local GetSpellBookItemName = GetSpellBookItemName
 local GetSpellBookItemTexture = GetSpellBookItemTexture
 
-LibStub("LibJayOptions"):New(select(2, GetAddOnInfo(AddOnName)), {
+LibMan1:Get("LibOptions", 1):New(select(2, GetAddOnInfo(AddOnName)), {
     { -- Version
         type = "string",
         text = L.VERSION,
