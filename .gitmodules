@@ -13,3 +13,6 @@
 [submodule "Libs/LibDatabase"]
 	path = Libs/LibDatabase
 	url = https://github.com/Jayrgo/LibDatabase.git
+[submodule "Libs/LibProtectedCall"]
+	path = Libs/LibProtectedCall
+	url = https://github.com/Jayrgo/LibProtectedCall.git
