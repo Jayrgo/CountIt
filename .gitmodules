@@ -7,3 +7,6 @@
 [submodule "Libs/LibCallback"]
 	path = Libs/LibCallback
 	url = https://github.com/Jayrgo/LibCallback.git
+[submodule "Libs/LibEvent"]
+	path = Libs/LibEvent
+	url = https://github.com/Jayrgo/LibEvent.git

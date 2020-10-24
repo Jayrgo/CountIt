@@ -16,7 +16,7 @@ Libs\LibSharedMedia-3.0\lib.xml
 Libs\LibMan\LibMan.xml
 Libs\LibMixin\LibMixin.xml
 Libs\LibCallback\LibCallback.xml
-Libs\LibJayEvent\LibJayEvent.xml
+Libs\LibEvent\LibEvent.xml
 Libs\LibJayDatabase\LibJayDatabase.xml
 Libs\LibJayProtectedCall\LibJayProtectedCall.xml
 Libs\LibJayDropDownMenu\LibJayDropDownMenu.xml

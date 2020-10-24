@@ -252,18 +252,18 @@ do -- getPowerTypeFromToken
     function getPowerTypeFromToken(powerToken) return lookup[powerToken] end
 end
 
-LibStub("LibJayEvent"):Register("ACTIONBAR_UPDATE_STATE", updateAction)
+LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_UPDATE_STATE", updateAction)
 
-LibStub("LibJayEvent"):Register("ACTIONBAR_SLOT_CHANGED", function() updateCount() end)
+LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_SLOT_CHANGED", function() updateCount() end)
 
-LibStub("LibJayEvent"):Register("ACTIONBAR_UPDATE_USABLE", updateCount)
+LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_UPDATE_USABLE", updateCount)
 
-LibStub("LibJayEvent"):Register("ACTIONBAR_UPDATE_COOLDOWN", updateCount)
+LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_UPDATE_COOLDOWN", updateCount)
 
 local Wait = C_Timer.After
-LibStub("LibJayEvent"):Register("ACTIONBAR_PAGE_CHANGED", function() Wait(0.1, updateAction) end)
+LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_PAGE_CHANGED", function() Wait(0.1, updateAction) end)
 
-LibStub("LibJayEvent"):Register("UNIT_POWER_FREQUENT", function(unitTarget, powerToken)
+LibMan1:Get("LibEvent", 1):Register("UNIT_POWER_FREQUENT", function(unitTarget, powerToken)
     if unitTarget == "player" then
         local powerType = getPowerTypeFromToken(powerToken)
         power[powerType] = UnitPower(unitTarget, powerType)
@@ -271,7 +271,7 @@ LibStub("LibJayEvent"):Register("UNIT_POWER_FREQUENT", function(unitTarget, powe
     end
 end)
 
-LibStub("LibJayEvent"):Register("UNIT_MAXPOWER", function(unitTarget, powerType)
+LibMan1:Get("LibEvent", 1):Register("UNIT_MAXPOWER", function(unitTarget, powerType)
     if unitTarget == "player" then
         maxPower[powerType] = UnitPowerMax(unitTarget, getPowerTypeFromToken(powerType))
         updateCount()
@@ -285,19 +285,19 @@ local function updateSpellPowerCost()
 end
 
 local UnitPowerType = UnitPowerType
-LibStub("LibJayEvent"):Register("PLAYER_ENTERING_WORLD", function(isInitialLogin, isReloadingUi)
+LibMan1:Get("LibEvent", 1):Register("PLAYER_ENTERING_WORLD", function(isInitialLogin, isReloadingUi)
     local powerType = UnitPowerType("player")
     power[powerType] = UnitPower("player", powerType)
     maxPower[powerType] = UnitPowerMax("player", powerType)
     updateAction()
 end)
 
-LibStub("LibJayEvent"):Register("UNIT_DISPLAYPOWER", function() updateCount() end)
+LibMan1:Get("LibEvent", 1):Register("UNIT_DISPLAYPOWER", function() updateCount() end)
 
-LibStub("LibJayEvent"):Register("UNIT_AURA",
-                                function(unitTarget) if unitTarget == "player" then updateSpellPowerCost() end end)
-LibStub("LibJayEvent"):Register("CHARACTER_POINTS_CHANGED", updateSpellPowerCost)
-LibStub("LibJayEvent"):Register("SPELLS_CHANGED", updateSpellPowerCost)
+LibMan1:Get("LibEvent", 1):Register("UNIT_AURA",
+                                    function(unitTarget) if unitTarget == "player" then updateSpellPowerCost() end end)
+LibMan1:Get("LibEvent", 1):Register("CHARACTER_POINTS_CHANGED", updateSpellPowerCost)
+LibMan1:Get("LibEvent", 1):Register("SPELLS_CHANGED", updateSpellPowerCost)
 
 DB:RegisterCallback("OnChanged", function() update() end)
 

@@ -10,7 +10,7 @@ end
 
 if not check() then
     local function ADDON_LOADED(addon)
-        if check() then LibStub("LibJayEvent"):Unregister("ADDON_LOADED", ADDON_LOADED) end
+        if check() then LibMan1:Get("LibEvent", 1):Unregister("ADDON_LOADED", ADDON_LOADED) end
     end
-    LibStub("LibJayEvent"):Register("ADDON_LOADED", ADDON_LOADED)
+    LibMan1:Get("LibEvent", 1):Register("ADDON_LOADED", ADDON_LOADED)
 end
