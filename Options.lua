@@ -13,11 +13,81 @@ local LSM = LibStub("LibSharedMedia-3.0")
 
 local getDbValue, setDbValue, getDefaultDbValue = LibMan1:Get("LibDatabaseOptions", 1):GetOptionFunctions(DB)
 
-local BOOKTYPE_SPELL = BOOKTYPE_SPELL
+---@type fun(info:table)
+local fillInfoWithSpells
+if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+    local BOOKTYPE_SPELL = BOOKTYPE_SPELL
+    local GetSpellBookItemName = GetSpellBookItemName
+    local GetSpellBookItemTexture = GetSpellBookItemTexture
+
+    ---@param info table
+    function fillInfoWithSpells(info)
+        local spellNames = info.arg[1]
+        local spellIcons = info.arg[2]
+
+        wipe(spellNames)
+        wipe(spellIcons)
+
+        local i = 0
+        while true do
+            i = i + 1
+            local spellName, spellSubName, spellID = GetSpellBookItemName(i, BOOKTYPE_SPELL)
+            if spellName then
+                local fullSpellName = spellName .. (spellSubName ~= "" and (" (" .. spellSubName .. ")") or "")
+                spellNames[spellID] = fullSpellName
+                spellIcons[spellID] = GetSpellBookItemTexture(i, BOOKTYPE_SPELL)
+            else
+                break
+            end
+        end
+    end
+else
+    local BOOKTYPE_SPELL = BOOKTYPE_SPELL
+    local GetNumSpellTabs = GetNumSpellTabs
+    local GetSpellTabInfo = GetSpellTabInfo
+    local GetSpellBookItemInfo = GetSpellBookItemInfo
+    local GetFlyoutInfo = GetFlyoutInfo
+    local GetFlyoutSlotInfo = GetFlyoutSlotInfo
+    local GetSpellTexture = GetSpellTexture
+    local GetSpellBookItemName = GetSpellBookItemName
+    local GetSpellBookItemTexture = GetSpellBookItemTexture
+
+    ---@param info table
+    function fillInfoWithSpells(info)
+        local spellNames = info.arg[1]
+        local spellIcons = info.arg[2]
+
+        wipe(spellNames)
+        wipe(spellIcons)
+
+        local numTabs = GetNumSpellTabs()
+        for numTab = 1, numTabs do
+            local name, texture, offset, numEntries, isGuild, offspecID = GetSpellTabInfo(numTab)
+            for index = offset, offset + numEntries do
+                local skillType, special = GetSpellBookItemInfo(index, BOOKTYPE_SPELL)
+                if skillType == "FLYOUT" then
+                    local flyoutName, flyoutDesc, flyoutNumSlots = GetFlyoutInfo(special)
+                    for numFlyout = 1, flyoutNumSlots do
+                        local spellID, overrideSpellID, isKnown, spellName, slotSpecID =
+                            GetFlyoutSlotInfo(special, numFlyout)
+                        spellNames[spellID] = spellName
+                        spellIcons[spellID] = GetSpellTexture(overrideSpellID)
+                    end
+                else
+                    local spellName, spellSubName, spellID = GetSpellBookItemName(index, BOOKTYPE_SPELL)
+                    if spellName then
+                        local fullSpellName = spellName .. (spellSubName ~= "" and (" (" .. spellSubName .. ")") or "")
+                        spellNames[spellID] = fullSpellName
+                        spellIcons[spellID] = GetSpellBookItemTexture(index, BOOKTYPE_SPELL)
+                    end
+                end
+            end
+        end
+    end
+end
+
 local GetActionTexture = GetActionTexture
 local GetMacroInfo = GetMacroInfo
-local GetSpellBookItemName = GetSpellBookItemName
-local GetSpellBookItemTexture = GetSpellBookItemTexture
 
 LibMan1:Get("LibOptions", 1):New(select(2, GetAddOnInfo(AddOnName)), {
     { -- Version
@@ -162,24 +232,7 @@ LibMan1:Get("LibOptions", 1):New(select(2, GetAddOnInfo(AddOnName)), {
                 path = "ignoredSpells",
                 values = function(info) return info.arg[1] end,
                 icons = function(info) return info.arg[2] end,
-                onRefresh = function(info)
-                    wipe(info.arg[1])
-                    wipe(info.arg[2])
-
-                    local i = 0
-                    while true do
-                        i = i + 1
-                        local spellName, spellSubName, spellID = GetSpellBookItemName(i, BOOKTYPE_SPELL)
-                        if spellName then
-                            local fullSpellName = spellName ..
-                                                      (spellSubName ~= "" and (" (" .. spellSubName .. ")") or "")
-                            info.arg[1][spellID] = fullSpellName
-                            info.arg[2][spellID] = GetSpellBookItemTexture(i, BOOKTYPE_SPELL)
-                        else
-                            break
-                        end
-                    end
-                end,
+                onRefresh = fillInfoWithSpells,
                 arg = {{}, {}},
             },
             { -- ignoredActionSlots
