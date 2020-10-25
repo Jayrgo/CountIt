@@ -41,3 +41,31 @@ do -- SpellBook
 
     hooksecurefunc(_G, "SpellBookFrame_UpdateSpells", updateButtonsCount)
 end
+
+if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then -- SpellFlyout
+    local flyoutButtons = {}
+
+    ---@param button CheckButton
+    ---@return number spellID
+    local function getSpellIDCallback(button) return button.spellID end
+
+    hooksecurefunc(SpellFlyout, "Toggle",
+                   function(self, flyoutID, parent, direction, distance, isActionBar, specID, showFullTooltip, reason)
+        if self:IsShown() then
+            local i = 1
+            ---@type CheckButton
+            local flyoutButton = _G["SpellFlyoutButton" .. i]
+
+            while flyoutButton do
+                if not flyoutButtons[flyoutButton] then
+                    AddOn:RegisterButton(flyoutButton, getSpellIDCallback)
+                    flyoutButtons[flyoutButton] = true
+                end
+
+                i = i + 1
+                ---@type CheckButton
+                flyoutButton = _G["SpellFlyoutButton" .. i]
+            end
+        end
+    end)
+end
