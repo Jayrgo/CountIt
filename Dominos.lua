@@ -5,10 +5,13 @@ local AddOnName = ...
 ---@type Addon
 local AddOn = select(2, ...)
 
+---@param button CheckButton
+---@return number
+local function getSpellIDCallback(button) return AddOn:GetSpellIDFromAction(AddOn:GetAction(button)) end
 
 local function registerButtons()
     for id, button in pairs(Dominos.ActionButtons) do -- luacheck: ignore 213
-        AddOn.RegisterButton(button)
+        AddOn:RegisterButton(button, getSpellIDCallback)
     end
 end
 

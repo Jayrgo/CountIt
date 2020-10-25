@@ -21,7 +21,13 @@ end
 
 ---@type CheckButton[]
 local buttons = {}
+
+---@type table<CheckButton, FontString>
 local fontStrings = {}
+
+---@type table<CheckButton, fun(button:CheckButton):number>
+local spellIDs = {}
+
 local LSM = LibStub("LibSharedMedia-3.0")
 
 ---@param button CheckButton
@@ -152,34 +158,23 @@ local GetSpellCooldown = GetSpellCooldown
 local GetTime = GetTime
 local IsUsableAction = IsUsableAction
 
----@param action number
+---@param spellID number
 ---@return number count
 ---@return number maxCount
-local function getActionCount(action)
-    if not action then return 0, 0 end
+local function getSpellCount(spellID)
+    if not spellID or spellID == 0 then return 0, 0 end
 
-    if not IsUsableAction(action) then return 0, 0 end
-
-    if DB:Get("visibility", "ignoredActionSlots", action) then return 0, 0 end
-
-    local actionType, id, subType = GetActionInfo(action)
-    if actionType == "macro" then
-        if DB:Get("visibility", "ignoredMacros", id) then return 0, 0 end
-        actionType, id = "spell", GetMacroSpell(id)
-    end
-    if actionType ~= "spell" or not id then return 0, 0 end
-
-    if DB:Get("visibility", "ignoredSpells", id) then return 0, 0 end
+    if DB:Get("visibility", "ignoredSpells", spellID) then return 0, 0 end
 
     if DB:Get("visibility", "cooldown", "hide") then
-        local start, duration, enabled, modRate = GetSpellCooldown(id)
+        local start, duration, enabled, modRate = GetSpellCooldown(spellID)
         if (start > 0 and duration > 0) and
             ((start + duration) > GetTime() + DB:Get("visibility", "cooldown", "threshold")) then return -1, 0 end
     end
 
     local count = 0
     local maxCount = 0
-    local costs = spellPowerCost[id]
+    local costs = spellPowerCost[spellID]
 
     for i = 1, #costs do
         local cost = costs[i]
@@ -191,7 +186,7 @@ local function getActionCount(action)
         end
     end
 
-    if CONSUMES_ALL[id] then
+    if CONSUMES_ALL[spellID] then
         count = count > 1 and 1 or count
         maxCount = maxCount > 1 and 1 or maxCount
     end
@@ -199,13 +194,10 @@ local function getActionCount(action)
     return floor(count), floor(maxCount)
 end
 
----@type table<CheckButton, number>
-local actions = {}
-
 ---@param button CheckButton
 local function updateCount(button)
     if button then
-        local count, maxCount = getActionCount(actions[button])
+        local count, maxCount = getSpellCount(spellIDs[button](button))
         local fontString = fontStrings[button]
         if count > 0 then
             local threshold = DB:Get("visibility", "threshold")
@@ -262,35 +254,8 @@ local function update(button)
     end
 end
 
----@param button CheckButton
----@return number
-local function getAction(button) return button:CalculateAction() end
-
-if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
-    local ActionButton_CalculateAction = ActionButton_CalculateAction
-
-    ---@type CheckButton
-    ---@return number
-    function getAction(button) return ActionButton_CalculateAction(button) end
-end
-
----@param button CheckButton
-local function updateAction(button)
-    if button then
-        local action = getAction(button)
-
-        if actions[button] ~= action then
-            actions[button] = action
-            updateCount(button)
-        end
-    else
-        for i = 1, #buttons do updateAction(buttons[i]) end
-    end
-end
-
 local getPowerTypeFromToken
 do -- getPowerTypeFromToken
-
     local lookup = {
         ALTERNATE = Enum.PowerType.Alternate,
         ARCANE_CHARGES = Enum.PowerType.ArcaneCharges,
@@ -319,7 +284,7 @@ do -- getPowerTypeFromToken
     function getPowerTypeFromToken(powerToken) return lookup[powerToken] end
 end
 
-LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_UPDATE_STATE", updateAction)
+LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_UPDATE_STATE", updateCount)
 
 LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_SLOT_CHANGED", function() updateCount() end)
 
@@ -329,7 +294,7 @@ LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_UPDATE_COOLDOWN", updateCount)
 
 local Wait = C_Timer.After
 
-LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_PAGE_CHANGED", function() Wait(0.1, updateAction) end)
+LibMan1:Get("LibEvent", 1):Register("ACTIONBAR_PAGE_CHANGED", function() Wait(0.1, updateCount) end)
 
 ---@param unitTarget string
 ---@param powerType string
@@ -366,7 +331,7 @@ LibMan1:Get("LibEvent", 1):Register("PLAYER_ENTERING_WORLD", function(isInitialL
     local powerType = UnitPowerType("player")
     power[powerType] = UnitPower("player", powerType)
     maxPower[powerType] = UnitPowerMax("player", powerType)
-    updateAction()
+    updateCount()
 end)
 
 LibMan1:Get("LibEvent", 1):Register("UNIT_DISPLAYPOWER", function() updateCount() end)
@@ -385,17 +350,56 @@ local tContains = tContains
 local type = type
 
 ---@param button CheckButton
-function AddOn.RegisterButton(button)
+---@param getSpellIDCallback fun(button:Button):number
+function AddOn:RegisterButton(button, getSpellIDCallback)
     if type(button) ~= "table" then
-        error(format("Usage: %s:RegisterButton(button): 'button' - table expected got %s", AddOnName, type(button)), 2)
+        error(format("Usage: %s:RegisterButton(button, getSpellIDCallback): 'button' - table expected got %s",
+                     AddOnName, type(button)), 2)
+    end
+    if type(getSpellIDCallback) ~= "function" then
+        error(format(
+                  "Usage: %s:RegisterButton(button, getSpellIDCallback): 'getSpellIDCallback' - function expected got %s",
+                  AddOnName, type(getSpellIDCallback)), 2)
     end
 
     if tContains(buttons, button) then return end
     buttons[#buttons + 1] = button
 
-    ---@type FontString
-    fontStrings[button] = button:CreateFontString()
+    spellIDs[button] = getSpellIDCallback
+    fontStrings[button] = fontStrings[button] or button:CreateFontString()
+
     updateText(button)
-    updateAction(button)
-    addCheck(button)
+    updateCount(button)
 end
+
+---@param action number
+---@return number spellID
+function AddOn:GetSpellIDFromAction(action)
+    if not action then return end
+
+    if not IsUsableAction(action) then return end
+
+    if DB:Get("visibility", "ignoredActionSlots", action) then return end
+
+    local actionType, id, subType = GetActionInfo(action)
+    if actionType == "macro" then
+        if DB:Get("visibility", "ignoredMacros", id) then return end
+        actionType, id = "spell", GetMacroSpell(id)
+    end
+    if actionType ~= "spell" or not id then return end
+
+    return id
+end
+
+---@param button CheckButton
+---@return number action
+function AddOn:GetAction(button) return button:CalculateAction() end
+
+if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+    ---@param button CheckButton
+    ---@return number action
+    function AddOn:GetAction(button) return ActionButton_CalculateAction(button) end
+end
+
+---@param button CheckButton
+function AddOn:UpdateButtonCount(button) updateCount(button) end
