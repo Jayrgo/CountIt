@@ -81,8 +81,7 @@ local maxPower = setmetatable({}, {
     end,
 })
 
----@type table<number, boolean>
-local CONSUMES_ALL = {}
+local CONSUMES_ALL
 
 if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
     ---@type table<number, boolean>
@@ -151,7 +150,8 @@ local spellPowerCost = setmetatable({}, {
 })
 
 local floor = floor
-local max = max
+local huge = math.huge
+local min = min
 local GetActionInfo = GetActionInfo
 local GetMacroSpell = GetMacroSpell
 local GetSpellCooldown = GetSpellCooldown
@@ -172,26 +172,37 @@ local function getSpellCount(spellID)
             ((start + duration) > GetTime() + DB:Get("visibility", "cooldown", "threshold")) then return -1, 0 end
     end
 
-    local count = 0
-    local maxCount = 0
+    local count
+    local maxCount
     local costs = spellPowerCost[spellID]
+    if not costs then return 0, 0 end -- sometimes it is nil
 
     for i = 1, #costs do
         local cost = costs[i]
-        if cost.cost > 0 then
-            if power[cost.type] > 0 then
-                count = max(count, power[cost.type] / cost.cost)
-                maxCount = max(maxCount, maxPower[cost.type] / cost.cost)
+
+        local powerType = cost.type
+        local minCost = cost.minCost
+        cost = cost.cost
+
+        if cost > 0 then
+            local power = power[powerType] -- luacheck: ignore 431
+
+            if power > 0 then
+                local maxPower = maxPower[powerType] -- luacheck: ignore 431
+
+                count = min(count and count or huge, power / (power < cost and minCost or cost))
+                maxCount = min(maxCount and maxCount or huge, maxPower / (maxPower < cost and minCost or cost))
             end
         end
     end
 
-    if CONSUMES_ALL[spellID] then
-        count = count > 1 and 1 or count
-        maxCount = maxCount > 1 and 1 or maxCount
+    if CONSUMES_ALL and CONSUMES_ALL[spellID] then
+        count = (count and count > 1) and 1 or count
+        maxCount = (maxCount and maxCount > 1) and 1 or maxCount
     end
 
-    return floor(count), floor(maxCount)
+    return count and floor((maxCount and maxCount <= count) and maxCount or count) or 0,
+           maxCount and floor(maxCount) or 0
 end
 
 ---@param button CheckButton
